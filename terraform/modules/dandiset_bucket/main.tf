@@ -344,7 +344,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "expire_noncurrent_manifest_fil
   # Must have bucket versioning enabled first
   depends_on = [aws_s3_bucket_versioning.dandiset_bucket]
 
-  count = var.versioning ? 1 : 0
+  count = var.versioning && var.enable_manifest_file_expiration ? 1 : 0
 
   bucket = aws_s3_bucket.dandiset_bucket.id
 
