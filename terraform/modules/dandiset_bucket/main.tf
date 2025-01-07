@@ -357,9 +357,11 @@ resource "aws_s3_bucket_lifecycle_configuration" "expire_noncurrent_manifest_fil
       prefix = "dandisets/"
     }
 
-    # Only keep 1 noncurrent version of manifest files
     noncurrent_version_expiration {
+      # keep most recent noncurrent version indefinitely
       newer_noncurrent_versions = 1
+      # delete all other noncurrent versions after 1 day
+      noncurrent_days = 1
     }
 
     # Also delete any delete markers associated with the expired object
