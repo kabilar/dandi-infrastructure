@@ -31,7 +31,25 @@ resource "aws_route53_record" "www" {
   name    = "www"
   type    = "CNAME"
   ttl     = "300"
-  records = ["dandi.github.io"]
+  records = ["gui-dandiarchive-org.netlify.app."]
+}
+
+# This resource block and the next are using GitHub's custom domain
+# redirection.
+resource "aws_route53_record" "about" {
+  zone_id = aws_route53_zone.dandi.zone_id
+  name    = "about"
+  type    = "CNAME"
+  ttl     = "300"
+  records = ["dandi.github.io."]
+}
+
+resource "aws_route53_record" "docs" {
+  zone_id = aws_route53_zone.dandi.zone_id
+  name    = "docs"
+  type    = "CNAME"
+  ttl     = "300"
+  records = ["dandi.github.io."]
 }
 
 resource "aws_route53_record" "email" {
